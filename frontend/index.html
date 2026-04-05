@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wanderlust — Discover the World</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✈️</text></svg>">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <a class="logo" onclick="showPage('home')" style="cursor:pointer">
+    ✈️ Wander<span>lust</span>
+  </a>
+  <ul class="nav-links">
+    <li><a onclick="showPage('home')" style="cursor:pointer">Home</a></li>
+    <li><a onclick="showPage('explore')" style="cursor:pointer">Explore</a></li>
+    <li><a onclick="showPage('wishlist')" style="cursor:pointer">Wishlist</a></li>
+    <li><a onclick="showPage('bookings')" style="cursor:pointer">My Trips</a></li>
+  </ul>
+  <div class="nav-actions" id="navActions">
+    <button class="btn btn-outline btn-sm" onclick="openAuthModal('login')">Log In</button>
+    <button class="btn btn-primary btn-sm" onclick="openAuthModal('register')">Sign Up</button>
+  </div>
+</nav>
+
+<!-- =================== HOME PAGE =================== -->
+<div id="page-home" class="page-view">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-badge">🌍 500+ Destinations Worldwide</div>
+      <h1>Explore the World with <em>Wanderlust</em></h1>
+      <p>Discover breathtaking destinations, curated experiences, and unforgettable journeys. Your next great adventure starts here.</p>
+      <div class="hero-actions">
+        <button class="btn btn-coral btn-lg" onclick="showPage('explore')">🗺️ Start Exploring</button>
+        <button class="btn" style="background:rgba(255,255,255,0.15);color:white;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.3)" onclick="openAuthModal('register')">Create Free Account</button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-number">500+</div>
+          <div class="stat-label">Destinations</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">50K+</div>
+          <div class="stat-label">Happy Travelers</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">4.9★</div>
+          <div class="stat-label">Average Rating</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEARCH BAR -->
+  <div class="search-container">
+    <div class="search-bar">
+      <div class="search-field" style="flex:2">
+        <label>Where to?</label>
+        <input type="text" id="searchInput" placeholder="Search destinations, countries..." onkeydown="handleSearch(event)">
+      </div>
+      <div class="search-divider"></div>
+      <div class="search-field">
+        <label>Category</label>
+        <select id="searchCategory" onchange="state.filters.category=this.value">
+          <option value="">All Types</option>
+          <option value="beach">🏖️ Beach</option>
+          <option value="adventure">🏔️ Adventure</option>
+          <option value="cultural">🏛️ Cultural</option>
+          <option value="luxury">💎 Luxury</option>
+          <option value="nature">🌿 Nature</option>
+          <option value="romantic">💑 Romantic</option>
+        </select>
+      </div>
+      <div class="search-divider"></div>
+      <div class="search-field">
+        <label>Continent</label>
+        <select id="searchContinent" onchange="state.filters.continent=this.value">
+          <option value="">All Continents</option>
+          <option value="Europe">🇪🇺 Europe</option>
+          <option value="Asia">🌏 Asia</option>
+          <option value="Africa">🌍 Africa</option>
+          <option value="South America">🌎 South America</option>
+        </select>
+      </div>
+      <button class="btn btn-coral" onclick="handleSearch({type:'click'})">🔍 Search</button>
+    </div>
+  </div>
+
+  <!-- FEATURED -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-tag">⭐ Editor's Picks</div>
+      <h2 class="section-title">Top Rated Destinations</h2>
+      <p class="section-subtitle">Handpicked by our travel experts for unforgettable experiences</p>
+    </div>
+    <div class="featured-grid" id="featuredGrid">
+      <div class="skeleton"></div>
+      <div class="skeleton"></div>
+      <div class="skeleton"></div>
+    </div>
+  </section>
+
+  <!-- WHY CHOOSE US -->
+  <section class="section" style="background:var(--sand)">
+    <div class="section-header">
+      <div class="section-tag">🌟 Why Wanderlust</div>
+      <h2 class="section-title">Travel Made Effortless</h2>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3>Secure Booking</h3>
+        <p>Your payment and personal data are always protected with enterprise-grade security.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💬</div>
+        <h3>24/7 Support</h3>
+        <p>Our travel experts are available around the clock to assist you before and during your trip.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🏆</div>
+        <h3>Best Price Promise</h3>
+        <p>Found a better price? We'll match it. Get the best deal guaranteed, every time.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌿</div>
+        <h3>Sustainable Travel</h3>
+        <p>We offset carbon emissions and partner with eco-friendly accommodations worldwide.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌿</div>
+        <h3>Sustainable Travel</h3>
+        <p>We offset carbon emissions and partner with eco-friendly accommodations worldwide.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-tag">💬 Traveler Stories</div>
+      <h2 class="section-title">What Our Travelers Say</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+        <p class="testimonial-text">"Wanderlust made booking our Santorini honeymoon absolutely seamless. Every detail was perfect — from the cliff-side hotel to the private sunset cruise."</p>
+        <div class="testimonial-author">
+          <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Emma" alt="Emma">
+          <div>
+            <div class="testimonial-name">Emma & David</div>
+            <div class="testimonial-loc">📍 Santorini, Greece</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+        <p class="testimonial-text">"The Bali package was incredible value. Our villa had a private pool and the included temple tour gave us authentic cultural access we couldn't find elsewhere."</p>
+        <div class="testimonial-author">
+          <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Marcus" alt="Marcus">
+          <div>
+            <div class="testimonial-name">Marcus T.</div>
+            <div class="testimonial-loc">📍 Ubud, Bali</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+        <p class="testimonial-text">"Witnessing the Northern Lights in Iceland was on my bucket list for 10 years. Wanderlust made it happen perfectly. The Blue Lagoon was the cherry on top!"</p>
+        <div class="testimonial-author">
+          <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Priya" alt="Priya">
+          <div>
+            <div class="testimonial-name">Priya Sharma</div>
+            <div class="testimonial-loc">📍 Reykjavik, Iceland</div>
+          </div>
+        </div>
+      </div>
+       <div class="testimonial-card">
+        <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+        <p class="testimonial-text">"Witnessing the Northern Lights in Iceland was on my bucket list for 10 years. Wanderlust made it happen perfectly. The Blue Lagoon was the cherry on top!"</p>
+        <div class="testimonial-author">
+          <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Priya" alt="Priya">
+          <div>
+            <div class="testimonial-name">Priya Sharma</div>
+            <div class="testimonial-loc">📍 Reykjavik, Iceland</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA STRIP -->
+  <section style="background:linear-gradient(135deg, var(--coral), #c4422a);padding:60px 5%;text-align:center">
+    <h2 style="color:white;font-size:2rem;margin-bottom:12px">Ready for Your Next Adventure?</h2>
+    <p style="color:rgba(255,255,255,0.85);margin-bottom:28px">Join 50,000+ travelers who trust Wanderlust for their journeys</p>
+    <button class="btn btn-gold btn-lg" onclick="showPage('explore')">✈️ Explore All Destinations</button>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter">
+    <h2>Get Travel Inspiration 📬</h2>
+    <p>Subscribe for exclusive deals, hidden gems, and travel tips delivered weekly</p>
+    <div class="newsletter-form">
+      <input type="email" id="newsletterEmail" placeholder="your@email.com">
+      <button class="btn btn-coral" onclick="subscribeNewsletter()">Subscribe</button>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="logo" style="font-size:1.4rem">✈️ Wander<span style="color:var(--coral)">lust</span></a>
+        <p>Making travel dreams come true since 2020. Discover the world's most beautiful destinations with expert guidance and unbeatable prices.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Destinations</h4>
+        <ul>
+          <li><a onclick="showPage('explore')">Europe</a></li>
+          <li><a onclick="showPage('explore')">Asia</a></li>
+          <li><a onclick="showPage('explore')">Africa</a></li>
+          <li><a onclick="showPage('explore')">Americas</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">Cancellation</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 Wanderlust. Made with ❤️ for travelers everywhere.</p>
+    </div>
+  </footer>
+
+</div>
+
+<!-- =================== EXPLORE PAGE =================== -->
+<div id="page-explore" class="page-view" style="padding-top:72px">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-tag">🗺️ Destinations</div>
+      <h2 class="section-title">Explore the World</h2>
+      <p class="section-subtitle">Discover 500+ destinations across every corner of the globe</p>
+    </div>
+
+    <!-- Filters -->
+    <div class="filters-bar">
+      <span style="font-weight:600;font-size:0.9rem;color:var(--text-light)">Filter:</span>
+      <button class="filter-chip" data-filter="category" data-val="beach" onclick="setFilter('category','beach')">🏖️ Beach</button>
+      <button class="filter-chip" data-filter="category" data-val="adventure" onclick="setFilter('category','adventure')">🏔️ Adventure</button>
+      <button class="filter-chip" data-filter="category" data-val="cultural" onclick="setFilter('category','cultural')">🏛️ Cultural</button>
+      <button class="filter-chip" data-filter="category" data-val="luxury" onclick="setFilter('category','luxury')">💎 Luxury</button>
+      <button class="filter-chip" data-filter="category" data-val="nature" onclick="setFilter('category','nature')">🌿 Nature</button>
+      <button class="filter-chip" data-filter="category" data-val="romantic" onclick="setFilter('category','romantic')">💑 Romantic</button>
+      <select class="filter-select" onchange="setSort(this.value)">
+        <option value="">Sort By</option>
+        <option value="rating">⭐ Top Rated</option>
+        <option value="popular">🔥 Most Popular</option>
+        <option value="price-asc">💰 Price: Low to High</option>
+        <option value="price-desc">💎 Price: High to Low</option>
+      </select>
+    </div>
+
+    <div class="destinations-grid" id="destinationsGrid">
+      <div class="skeleton"></div>
+      <div class="skeleton"></div>
+      <div class="skeleton"></div>
+      <div class="skeleton"></div>
+      <div class="skeleton"></div>
+      <div class="skeleton"></div>
+    </div>
+  </div>
+</div>
+
+<!-- =================== WISHLIST PAGE =================== -->
+<div id="page-wishlist" class="page-view" style="padding-top:72px">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-tag">❤️ Saved</div>
+      <h2 class="section-title">My Wishlist</h2>
+      <p class="section-subtitle">Destinations you love and dream to visit</p>
+    </div>
+    <div id="wishlistGrid"></div>
+  </div>
+</div>
+
+<!-- =================== BOOKINGS PAGE =================== -->
+<div id="page-bookings" class="page-view" style="padding-top:72px">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-tag">🧳 My Trips</div>
+      <h2 class="section-title">My Bookings</h2>
+      <p class="section-subtitle">All your travel bookings in one place</p>
+    </div>
+    <div id="bookingsList"></div>
+  </div>
+</div>
+
+<!-- =================== DESTINATION MODAL =================== -->
+<div class="modal-overlay" id="destModal" onclick="if(event.target===this)closeDest()"></div>
+
+<!-- =================== AUTH MODAL =================== -->
+<div class="modal-overlay" id="authModal" onclick="if(event.target===this)closeAuthModal()">
+  <div class="modal auth-modal">
+    <button class="modal-close" style="position:absolute;top:16px;right:16px;z-index:1" onclick="closeAuthModal()">✕</button>
+    <div class="auth-header" id="authHeader"></div>
+    <div class="auth-body" id="authBody"></div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
