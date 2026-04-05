@@ -518,7 +518,7 @@ function setAuthMode(mode) {
       <div class="auth-switch">Don't have an account? <a onclick="setAuthMode('register')">Sign Up</a></div>
     `;
   } else {
-    header.innerHTML = `<h2>Join Wanderlust 🌍</h2><p>Create your account and start exploring</p>`;
+    header.innerHTML = `<h2>Join GlobRoute 🌍</h2><p>Create your account and start exploring</p>`;
     body.innerHTML = `
       <div class="form-group"><label>Full Name</label><input type="text" id="authName" placeholder="Your name"></div>
       <div class="form-group"><label>Email</label><input type="email" id="authEmail" placeholder="you@email.com"></div>
@@ -568,7 +568,7 @@ function showToast(msg, type = 'default') {
 function subscribeNewsletter() {
   const email = document.getElementById('newsletterEmail').value;
   if (!email) return showToast('Please enter your email', 'error');
-  showToast('🎉 Subscribed! Welcome to the Wanderlust community!', 'success');
+  showToast('🎉 Subscribed! Welcome to the GlobRoute community!', 'success');
   document.getElementById('newsletterEmail').value = '';
 }
 
